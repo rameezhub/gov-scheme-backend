@@ -1,31 +1,24 @@
-const jwt = require("jsonwebtoken");
-
-/**
- * TEMP DEMO LOGIN
- * Email: demo@gov.in
- * Password: demo123
- */
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  let user = await User.findOne({ where: { email: req.body.email } });
 
-  if (email === "demo@gov.in" && password === "demo123") {
-    const token = jwt.sign(
-      { id: 1, role: "user" },
-      process.env.JWT_SECRET || "demo_secret_123",
-      { expiresIn: "1d" }
-    );
-
-    return res.json({ token });
+  // 🔥 AUTO-CREATE USER IF NOT EXISTS (DEV ONLY)
+  if (!user) {
+    const hashed = await bcrypt.hash("demo123", 10);
+    user = await User.create({
+      email: "demo@gov.in",
+      password: hashed,
+      role: "user",
+    });
   }
 
-  return res.status(401).json({ msg: "Invalid credentials" });
-};
+  const match = await bcrypt.compare(req.body.password, user.password);
+  if (!match) return res.status(401).json({ msg: "Wrong password" });
 
-/**
- * Disabled register for now
- */
-exports.register = async (req, res) => {
-  return res.status(403).json({
-    msg: "Registration disabled for demo",
-  });
+  const token = jwt.sign(
+    { id: user.id, role: user.role },
+    process.env.JWT_SECRET,
+    { expiresIn: "7d" }
+  );
+
+  res.json({ token });
 };
