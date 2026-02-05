@@ -1,15 +1,11 @@
-const router = require("express").Router();
-const authController = require("../controllers/auth.controller");
-
-router.post("/register", authController.register);
-router.post("/login", authController.login);
-
-module.exports = router;
 const express = require("express");
+const router = express.Router();
 
+// ❌ REMOVE DUPLICATE IMPORTS
 const authController = require("../controllers/auth.controller");
 
-router.post("/register", authController.register);
+// Routes
 router.post("/login", authController.login);
+router.post("/register", authController.register);
 
 module.exports = router;
