@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const Scheme = require("../models/Scheme");
 
 // GET all schemes
@@ -10,8 +11,7 @@ exports.getAllSchemes = async (req, res) => {
   }
 };
 
-// GET recommended schemes (temporary simple logic)
-
+// GET recommended schemes
 exports.recommendSchemes = async (req, res) => {
   const { age, income, state } = req.query;
 
@@ -21,8 +21,8 @@ exports.recommendSchemes = async (req, res) => {
         minAge: { [Op.lte]: age },
         maxAge: { [Op.gte]: age },
         maxIncome: { [Op.gte]: income },
-        states: { [Op.like]: `%${state}%` }
-      }
+        states: { [Op.like]: `%${state}%` },
+      },
     });
 
     res.json(schemes);
@@ -30,3 +30,4 @@ exports.recommendSchemes = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
