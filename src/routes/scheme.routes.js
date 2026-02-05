@@ -5,6 +5,6 @@ const schemeController = require("../controllers/scheme.controller");
 
 // Public routes
 router.get("/", schemeController.getAllSchemes);
-router.get("/recommend", schemeController.getRecommendations);
+router.get("/recommend", schemeController.recommendSchemes);
 
 module.exports = router;
