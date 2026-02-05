@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-// ❌ REMOVE DUPLICATE IMPORTS
+// ✅ IMPORT ONCE
 const authController = require("../controllers/auth.controller");
 
-// Routes
+// ✅ FUNCTION NAMES MUST MATCH EXACTLY
 router.post("/login", authController.login);
 router.post("/register", authController.register);
 
