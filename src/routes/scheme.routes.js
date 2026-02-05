@@ -1,11 +1,10 @@
-const router = require("express").Router();
-const auth = require("../middleware/auth.middleware");
-const schemeCtrl = require("../controllers/scheme.controller");
+const express = require("express");
+const router = express.Router();
 
-// OPTIONAL debug (now correct)
-// console.log("auth:", typeof auth);
-// console.log("getRecommendations:", typeof schemeCtrl.getRecommendations);
+const schemeController = require("../controllers/scheme.controller");
 
-router.get("/recommend", auth, schemeCtrl.getRecommendations);
+// Public routes
+router.get("/", schemeController.getAllSchemes);
+router.get("/recommend", schemeController.getRecommendations);
 
 module.exports = router;

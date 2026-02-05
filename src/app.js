@@ -1,18 +1,18 @@
 const express = require("express");
-const cors = require("cors");
-
 const app = express();
 
-app.use(cors());
 app.use(express.json());
 
-// ROUTES
+// Routes
 const authRoutes = require("./routes/auth.routes");
-const adminRoutes = require("./routes/admin.routes");
+const userRoutes = require("./routes/user.routes");
 const schemeRoutes = require("./routes/scheme.routes");
+const adminRoutes = require("./routes/admin.routes");
 
+// Mount routes
 app.use("/api/auth", authRoutes);
-app.use("/api/admin", adminRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/schemes", schemeRoutes);
+app.use("/api/admin", adminRoutes);
 
 module.exports = app;
