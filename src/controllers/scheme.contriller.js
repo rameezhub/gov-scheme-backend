@@ -1,4 +1,4 @@
-exports.getAllSchemes = (req, res) => {
+function getAllSchemes(req, res) {
   res.json([
     {
       id: 1,
@@ -13,13 +13,11 @@ exports.getAllSchemes = (req, res) => {
     {
       id: 3,
       name: "Skill India",
-      description: "Skill training & employment support",
-    },
-    {
-      id: 4,
-      name: "Old Age Pension",
-      description: "Monthly pension for senior citizens",
+      description: "Skill training and employment",
     },
   ]);
-};
+}
 
+module.exports = {
+  getAllSchemes,
+};
