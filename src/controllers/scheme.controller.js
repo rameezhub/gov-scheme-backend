@@ -1,33 +1,20 @@
-const { Op } = require("sequelize");
-const Scheme = require("../models/Scheme");
-
-// GET all schemes
 exports.getAllSchemes = async (req, res) => {
-  try {
-    const schemes = await Scheme.findAll();
-    res.json(schemes);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
-// GET recommended schemes
-exports.recommendSchemes = async (req, res) => {
-  const { age, income, state } = req.query;
-
-  try {
-    const schemes = await Scheme.findAll({
-      where: {
-        minAge: { [Op.lte]: age },
-        maxAge: { [Op.gte]: age },
-        maxIncome: { [Op.gte]: income },
-        states: { [Op.like]: `%${state}%` },
-      },
-    });
-
-    res.json(schemes);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  res.json([
+    {
+      id: 1,
+      name: "PM Kisan Yojana",
+      description: "₹6000 yearly support for farmers",
+    },
+    {
+      id: 2,
+      name: "Ayushman Bharat",
+      description: "Free health insurance up to ₹5 lakh",
+    },
+    {
+      id: 3,
+      name: "Skill India",
+      description: "Skill training and employment support",
+    },
+  ]);
 };
 
