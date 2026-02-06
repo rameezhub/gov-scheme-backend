@@ -1,9 +1,9 @@
-exports.getAllSchemes = async (req, res) => {
+exports.getAllSchemes = (req, res) => {
   res.json([
     {
       id: 1,
       name: "PM Kisan Yojana",
-      description: "₹6000 yearly support for farmers",
+      description: "₹6000 yearly income support for farmers",
     },
     {
       id: 2,
@@ -13,7 +13,12 @@ exports.getAllSchemes = async (req, res) => {
     {
       id: 3,
       name: "Skill India",
-      description: "Skill training and employment support",
+      description: "Skill training & employment support",
+    },
+    {
+      id: 4,
+      name: "Old Age Pension",
+      description: "Monthly pension for senior citizens",
     },
   ]);
 };
